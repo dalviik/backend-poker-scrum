@@ -4,6 +4,59 @@ var app = express();
 const models = require('../models');
 const { Op } = models.Sequelize;
 
+
+// =================================================
+// Crear ROOM
+// =================================================
+app.post('/', async (req, res, next) => {
+  console.log('\n=========***** CREAR ROOM *****=========');
+  console.log(' ______________===> params:', req.body);
+
+  const room = await models.room.create({});
+
+  console.log('Se ha creado la sala exitosamente');
+
+  res.status(200).json({
+    room,
+    ok: true,
+  });
+});
+
+
+// =================================================
+// LISTAR PLAYERS ROOM
+// =================================================
+app.get('/:id', async (req, res, next) => {
+  console.log('\n=========***** OBTENER PLAYER DE ROOM *****=========');
+  console.log('El id es obt :', req.params.id);
+
+  const existRoom = await models.room.findOne({
+    where: {
+      idRoom: req.params.id,
+    },
+  });
+
+  if (existRoom) {
+    const players = await models.player.findAll({
+      where: {
+        fcod_room: existRoom.idRoom,
+      },
+    });
+
+    res.status(200).json({
+      room: existRoom,
+      players: players,
+    });
+    return;
+  } else {
+    res.status(500).json({
+      ok: false,
+      errorMessage: 'No existe room con ese id',
+    });
+  }
+});
+
+
 // =================================================
 // ACTUALIZAR PREGUNTA ROOM
 // =================================================
@@ -38,55 +91,5 @@ app.put('/:id', async (req, res, next) => {
   });
 });
 
-// =================================================
-// LISTAR PLAYERS ROOM
-// =================================================
-app.get('/:id', async (req, res, next) => {
-  console.log('\n=========***** OBTENER PLAYER DE ROOM *****=========');
-
-  console.log('El id es obt :', req.params.id);
-
-  const existRoom = await models.room.findOne({
-    where: {
-      idRoom: req.params.id,
-    },
-  });
-
-  if (existRoom) {
-    const players = await models.player.findAll({
-      where: {
-        fcod_room: existRoom.idRoom,
-      },
-    });
-
-    res.status(200).json({
-      room: existRoom,
-      players: players,
-    });
-    return;
-  } else {
-    res.status(500).json({
-      ok: false,
-      errorMessage: 'No existe modalidad con ese nombre',
-    });
-  }
-});
-
-// =================================================
-// Crear ROOM
-// =================================================
-app.post('/', async (req, res, next) => {
-  console.log('\n=========***** CREAR ROOM *****=========');
-  console.log(' ______________===> params:', req.body);
-
-  const room = await models.room.create({});
-
-  console.log('Se ha creado la sala exitosamente');
-
-  res.status(200).json({
-    room,
-    ok: true,
-  });
-});
 
 module.exports = app;
