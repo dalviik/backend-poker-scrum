@@ -6,7 +6,7 @@ const { Op } = models.Sequelize;
 
 
 // =================================================
-// Crear ROOM
+// CREAR ROOM
 // =================================================
 app.post('/', async (req, res, next) => {
   console.log('\n=========***** CREAR ROOM *****=========');
@@ -24,10 +24,10 @@ app.post('/', async (req, res, next) => {
 
 
 // =================================================
-// LISTAR PLAYERS ROOM
+// OBTENER INFO ROOM
 // =================================================
 app.get('/:id', async (req, res, next) => {
-  console.log('\n=========***** OBTENER PLAYER DE ROOM *****=========');
+  console.log('\n=========***** OBTENER INFO ROOM *****=========');
   console.log('El id es obt :', req.params.id);
 
   const existRoom = await models.room.findOne({
@@ -60,7 +60,7 @@ app.get('/:id', async (req, res, next) => {
 // =================================================
 // ACTUALIZAR PREGUNTA ROOM
 // =================================================
-app.put('/:id', async (req, res, next) => {
+app.put('/updateQuestion/:id', async (req, res, next) => {
   console.log('\n=========***** ACTUALIZAR PREGUNTA ROOM *****=========');
   console.log(' ______________===> params ID:', req.params.id);
   console.log(' ______________===> params:', req.body);

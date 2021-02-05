@@ -8,7 +8,7 @@ const { Op } = models.Sequelize;
 // =================================================
 // INGRESAR ROOM
 // =================================================
-app.post('/', async (req, res, next) => {
+app.post('/enterRoom/', async (req, res, next) => {
   console.log('\n=========***** INGRESAR ROOM *****=========');
   console.log(' ______________===> params:', req.body);
 
@@ -40,7 +40,7 @@ app.post('/', async (req, res, next) => {
 // =================================================
 // ACTUALIZAR PREGUNTA PLAYER
 // =================================================
-app.put('/:id', async (req, res, next) => {
+app.put('/updateScore/:id', async (req, res, next) => {
   console.log('\n=========***** ACTUALIZAR PREGUNTA PLAYER *****=========');
   console.log(' ______________===> params ID:', req.params.id);
   console.log(' ______________===> params:', req.body);
