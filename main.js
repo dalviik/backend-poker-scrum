@@ -1,18 +1,18 @@
 const express = require('express');
 const morgan = require('morgan');
 const cors = require('cors');
-// const https = require('https');
-// const path = require('path');
-// const fs = require('fs');
+const https = require('https');
+const path = require('path');
+const fs = require('fs');
 
 // initializations
 const app = express();
 
 // settings
-app.set('port', process.env.PORT || 3000);
+// app.set('port', process.env.PORT || 3000);
 
 // settings prod
-// app.set('port', process.env.PORT || 3001);
+app.set('port', process.env.PORT || 3003);
 
 // middlewares
 app.use(
@@ -44,18 +44,20 @@ app.use('/room', roomRoutes);
 app.use('/player', playerRoutes);
 app.use('/', appRoutes);
 
-/* const sslServer = https.createServer(
+
+/*
+const sslServer = https.createServer(
   {
     key: fs.readFileSync(path.join(__dirname, 'cert', 'privkey.pem')),
     cert: fs.readFileSync(path.join(__dirname, 'cert', 'fullchain.pem')),
   },
   app
-); */
+);
 
-/* 
+
 sslServer.listen(app.get('port'), () => {
   console.log(
-    ` ===== ${new Date()}\n\n ***** EDAV SYSTEM SECURE SERVER LEVANTADO EN EL PUERTO ${app.get(
+    ` ===== ${new Date()}\n\n ***** POKER FACE SECURE SERVER LEVANTADO EN EL PUERTO ${app.get(
       'port'
     )}`
   );
@@ -70,6 +72,8 @@ sslServer.listen(app.get('port'), () => {
   `);
 }); */
 
+
+ 
 app.listen(app.get('port'), () => {
   console.log(
     ` ===== ${new Date()}\n\n POKERSCRUM SERVER LEVANTADO EN EL PUERTO ${app.get('port')}`
@@ -84,3 +88,4 @@ app.listen(app.get('port'), () => {
  '---.~_ _ _&
   `);
 });
+ 
