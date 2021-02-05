@@ -25,7 +25,6 @@ app.post('/', async (req, res, next) => {
     });
   }
   
-
   const player = await models.player.create({
     playerName: req.body.playerName,
     fcod_room: existRoom.idRoom

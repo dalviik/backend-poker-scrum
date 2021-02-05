@@ -44,8 +44,8 @@ app.get('/:id', async (req, res, next) => {
     });
 
     res.status(200).json({
-      room: existRoom,
-      players: players,
+      ...existRoom.dataValues,
+      players:players
     });
     return;
   } else {
